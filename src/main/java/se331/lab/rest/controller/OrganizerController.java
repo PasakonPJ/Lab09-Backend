@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import se331.lab.rest.entity.Organizer;
 import se331.lab.rest.service.OrganizerService;
+import se331.lab.rest.util.LabMapper;
 
 @RestController
 public class OrganizerController {
@@ -16,7 +17,7 @@ public class OrganizerController {
     OrganizerService organizerService;
     @GetMapping("organizers")
     ResponseEntity<?> getOrganizers(){
-        return  ResponseEntity.ok(organizerService.getAllOrganizer());
+        return  ResponseEntity.ok(LabMapper.INSTANCE.getOrganizerDTO(organizerService.getAllOrganizer()));
     }
 
 }

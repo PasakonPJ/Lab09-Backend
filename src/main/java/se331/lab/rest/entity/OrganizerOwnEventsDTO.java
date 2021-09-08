@@ -1,15 +1,15 @@
 package se331.lab.rest.entity;
 
-import lombok.*;
-
-import javax.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventDTO {
+public class OrganizerOwnEventsDTO {
     Long id;
     String category;
     String title;
@@ -19,6 +19,5 @@ public class EventDTO {
     String time;
     Boolean petAllowed;
     EventOrganizerDTO organizer;
-
 
 }
