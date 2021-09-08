@@ -18,7 +18,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     @Autowired
     OrganizerRepository organizerRepository;
     @Override
-    @Transactional
+    @Transactional // can run connect the FK in DB but many overlapping data in ownEvent
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
         Organizer org1,org2, org3;
         org1 = organizerRepository.save(Organizer.builder().name("CAMT").build());
