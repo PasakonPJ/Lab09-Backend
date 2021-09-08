@@ -22,6 +22,8 @@ public class Event {
     String date;
     String time;
     Boolean petAllowed;
+    @ManyToOne
     Organizer organizer;
+    @ManyToMany(mappedBy = "eventHistory")
     List<Participant> participants;
 }
