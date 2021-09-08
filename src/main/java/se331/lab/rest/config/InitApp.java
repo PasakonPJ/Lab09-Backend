@@ -18,7 +18,7 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     @Autowired
     OrganizerRepository organizerRepository;
     @Override
-//    @Transactional
+    @Transactional
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
         Organizer org1,org2, org3;
         org1 = organizerRepository.save(Organizer.builder().name("CAMT").build());
