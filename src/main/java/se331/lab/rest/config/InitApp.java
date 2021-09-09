@@ -6,10 +6,13 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import se331.lab.rest.entity.Event;
 import se331.lab.rest.entity.Organizer;
+import se331.lab.rest.entity.Participant;
 import se331.lab.rest.repository.EventRepository;
 import se331.lab.rest.repository.OrganizerRepository;
+import se331.lab.rest.repository.ParticipantRepository;
 
 import javax.transaction.Transactional;
+
 
 @Component
 public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
@@ -17,6 +20,9 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
     EventRepository eventRepository;
     @Autowired
     OrganizerRepository organizerRepository;
+    @Autowired
+    ParticipantRepository participantRepository;
+
     @Override
     @Transactional // can run connect the FK in DB but many overlapping data in ownEvent
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
@@ -24,8 +30,16 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         org1 = organizerRepository.save(Organizer.builder().name("CAMT").build());
         org2 = organizerRepository.save(Organizer.builder().name("CMU").build());
         org3 = organizerRepository.save(Organizer.builder().name("ChiangMai").build());
-        Event tempEvent;
 
+        Participant pa1,pa2,pa3,pa4,pa5;
+        pa1 = participantRepository.save(Participant.builder().name("kong").telNo("0984").build());
+        pa2 = participantRepository.save(Participant.builder().name("DJ").telNo("035484").build());
+        pa3 = participantRepository.save(Participant.builder().name("Tar").telNo("068454").build());
+        pa4 = participantRepository.save(Participant.builder().name("TLE").telNo("056878").build());
+        pa5 = participantRepository.save(Participant.builder().name("Fax").telNo("098788").build());
+
+
+        Event tempEvent;
         tempEvent = eventRepository.save(Event.builder()
                 .category("Academic")
                 .title("Midterm Exam")
@@ -38,6 +52,11 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
         tempEvent.setOrganizer(org1);
         org1.getOwnEvents().add(tempEvent);
 
+
+        pa1.getEventHistory().add(tempEvent);
+        pa2.getEventHistory().add(tempEvent);
+        pa3.getEventHistory().add(tempEvent);
+
         tempEvent = eventRepository.save(Event.builder()
                 .category("Academic")
                 .title("Commencement Day")
@@ -49,6 +68,9 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .build());
         tempEvent.setOrganizer(org1);
         org1.getOwnEvents().add(tempEvent);
+        pa1.getEventHistory().add(tempEvent);
+        pa2.getEventHistory().add(tempEvent);
+        pa3.getEventHistory().add(tempEvent);
 
         tempEvent = eventRepository.save(Event.builder()
                 .category("Cultural")
@@ -61,6 +83,10 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .build());
         tempEvent.setOrganizer(org2);
         org2.getOwnEvents().add(tempEvent);
+        pa4.getEventHistory().add(tempEvent);
+        pa5.getEventHistory().add(tempEvent);
+        pa1.getEventHistory().add(tempEvent);
+
 
         tempEvent = eventRepository.save(Event.builder()
                 .category("Cultural")
@@ -73,5 +99,8 @@ public class InitApp implements ApplicationListener<ApplicationReadyEvent> {
                 .build());
         tempEvent.setOrganizer(org3);
         org3.getOwnEvents().add(tempEvent);
+        pa5.getEventHistory().add(tempEvent);
+        pa3.getEventHistory().add(tempEvent);
+        pa2.getEventHistory().add(tempEvent);
     }
 }
