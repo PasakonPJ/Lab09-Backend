@@ -18,6 +18,7 @@ public class OrganizerServiceImpl implements OrganizerService {
 
     @Override
     public List<Organizer> getAllOrganizer() {
+
         return organizerDao.getOrganizer(Pageable.unpaged()).getContent();
     }
 

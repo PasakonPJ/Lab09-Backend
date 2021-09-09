@@ -15,7 +15,7 @@ import se331.lab.rest.util.LabMapper;
 public class OrganizerController {
     @Autowired
     OrganizerService organizerService;
-    @GetMapping("organizers")
+    @GetMapping("/organizers")
     ResponseEntity<?> getOrganizers(){
         return  ResponseEntity.ok(LabMapper.INSTANCE.getOrganizerDTO(organizerService.getAllOrganizer()));
     }
