@@ -16,6 +16,7 @@ public class EventServiceImpl implements EventService{
     EventDao eventDao;
     @Autowired
     OrganizerDao organizerDao;
+
     @Override
     public Integer getEventSize() {
         return eventDao.getEventSize();
@@ -31,11 +32,11 @@ public class EventServiceImpl implements EventService{
         return eventDao.getEvent(id);
     }
 
+
     @Override
     @Transactional
     public Event save(Event event) {
-
-        Organizer organizer = organizerDao.findById(event.getId()).orElse(null);
+        Organizer organizer = organizerDao.findById(event.getOrganizer().getId()).orElse(null);
         event.setOrganizer(organizer);
         organizer.getOwnEvents().add(event);
         return eventDao.save(event);

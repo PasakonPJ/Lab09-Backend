@@ -13,9 +13,9 @@ import java.util.Optional;
 public class OrganizerDaoImpl implements OrganizerDao {
     @Autowired
     OrganizerRepository organizerRepository;
+
     @Override
     public Page<Organizer> getOrganizer(Pageable pageRequest) {
-
         return organizerRepository.findAll(pageRequest);
     }
 
